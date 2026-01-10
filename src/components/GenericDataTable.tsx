@@ -32,30 +32,31 @@ export function GenericDataTable<TData, TValue>({
   });
 
   return (
-    <div className="rounded-md border border-border bg-card p-4 mt-6">
+    <div className="rounded-md border border-border bg-card p-4 mt-4">
       <Table>
-        {!loading ? (
-          <>
-            <TableHeader>
-              {table.getHeaderGroups().map(headerGroup => (
-                <TableRow key={headerGroup.id}>
-                  {headerGroup.headers.map(header => (
-                    <TableHead
-                      key={header.id}
-                      className="text-muted-foreground uppercase"
-                    >
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  ))}
-                </TableRow>
+        <TableHeader>
+          {table.getHeaderGroups().map(headerGroup => (
+            <TableRow key={headerGroup.id}>
+              {headerGroup.headers.map(header => (
+                <TableHead
+                  key={header.id}
+                  className="text-muted-foreground uppercase"
+                >
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                </TableHead>
               ))}
-            </TableHeader>
-            <TableBody>
+            </TableRow>
+          ))}
+        </TableHeader>
+
+        <TableBody>
+          {!loading ? (
+            <>
               {table.getRowModel().rows?.length ? (
                 table.getRowModel().rows.map(row => (
                   <TableRow
@@ -85,19 +86,19 @@ export function GenericDataTable<TData, TValue>({
                   </TableCell>
                 </TableRow>
               )}
-            </TableBody>
-          </>
-        ) : (
-          Array.from({ length: 9 }).map((_, index) => (
-            <TableRow key={`skeleton-${index}`}>
-              {columns.map((_, colIndex) => (
-                <TableCell key={`cell-${colIndex}`} className="py-4">
-                  <div className="h-6 w-full animate-pulse rounded bg-muted" />
-                </TableCell>
-              ))}
-            </TableRow>
-          ))
-        )}
+            </>
+          ) : (
+            Array.from({ length: 9 }).map((_, index) => (
+              <TableRow key={`skeleton-${index}`}>
+                {columns.map((_, colIndex) => (
+                  <TableCell key={`cell-${colIndex}`} className="py-4">
+                    <div className="h-6 w-full animate-pulse rounded bg-muted" />
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))
+          )}
+        </TableBody>
       </Table>
     </div>
   );

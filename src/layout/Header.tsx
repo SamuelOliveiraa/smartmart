@@ -68,6 +68,7 @@ export default function Header({ active, onTabChange }: HeaderProps) {
         <ul className="w-full flex items-center gap-6 px-10 sm:px-0 sm:justify-center xl:justify-start min-w-lg sm:min-w-auto">
           {links.map(link => (
             <Text
+              key={link.href}
               as="li"
               size="paragraphTiny"
               className={listItemVariants({ active: active === link.href })}

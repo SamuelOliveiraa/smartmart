@@ -22,25 +22,31 @@ export default function Select({
   setSelectedItem
 }: SelectProps) {
   return (
-    <SelectComponent onValueChange={setSelectedItem}>
-      <SelectTrigger className="w-full bg-background cursor-pointer h-11">
-        <SelectValue placeholder={placeholder} className="h-10" />
-      </SelectTrigger>
-      <SelectContent position="popper">
-        <Text size="paragraphSmall" asChild className="h-11">
-          <SelectItem value="all">{placeholder}</SelectItem>
-        </Text>
+    <div className="w-full flex flex-col gap-2">
+      <Text as="label" size="paragraphSmall">
+        {placeholder}
+      </Text>
 
-        {dataSelect.map(item => (
-          <SelectItem
-            key={item.id}
-            value={String(item.id)}
-            className="cursor-pointer opacity-60 h-11"
-          >
-            <Text size="paragraphSmall"> {item.name}</Text>
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </SelectComponent>
+      <SelectComponent onValueChange={setSelectedItem}>
+        <SelectTrigger className="w-full bg-background cursor-pointer h-11">
+          <SelectValue placeholder={placeholder} className="h-10" />
+        </SelectTrigger>
+        <SelectContent position="popper">
+          <Text size="paragraphSmall" asChild className="h-11">
+            <SelectItem value="all">{placeholder}</SelectItem>
+          </Text>
+
+          {dataSelect.map(item => (
+            <SelectItem
+              key={item.id}
+              value={String(item.id)}
+              className="cursor-pointer opacity-60 h-11"
+            >
+              <Text size="paragraphSmall"> {item.name}</Text>
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </SelectComponent>
+    </div>
   );
 }

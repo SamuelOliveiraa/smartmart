@@ -1,6 +1,7 @@
 import Button from "@/components/Button";
 import { GenericDataTable } from "@/components/GenericDataTable";
 import HeaderPage from "@/components/HeaderPage";
+import AddProductModal from "@/components/modals/AddProductModal";
 import Select from "@/components/Select";
 import { useCategories } from "@/hooks/useCategories";
 import { useProducts } from "@/hooks/useProducts";
@@ -74,10 +75,8 @@ export default function Products() {
             Exportar CSV
           </Button>
         </div>
-        <Button>
-          <Plus className="size-4" />
-          Cadastrar Produto
-        </Button>
+
+        <AddProductModal />
       </HeaderPage>
 
       <div className="flex md:hidden items-center justify-end  gap-4">
