@@ -14,7 +14,7 @@ interface HeaderProps {
 }
 
 const listItemVariants = tv({
-  base: "flex items-center gap-1 cursor-pointer pb-3 border-b border-transparent transition-all duration-100",
+  base: "flex items-center gap-1 cursor-pointer pb-3 border-b border-transparent transition-all duration-100 flex-shrink-0 e whitespace-nowrap",
   variants: {
     active: {
       true: "border-blue-500 pb-3 text-blue-500",
@@ -27,60 +27,58 @@ const listItemVariants = tv({
 });
 
 export default function Header({ active, onTabChange }: HeaderProps) {
+  const links = [
+    {
+      label: "Dashboard",
+      href: "dashboard",
+      icon: LayoutDashboard,
+      onClick: () => onTabChange("dashboard")
+    },
+    {
+      label: "Products",
+      href: "products",
+      icon: Package,
+      onClick: () => onTabChange("products")
+    },
+    {
+      label: "Sales",
+      href: "sales",
+      icon: ShoppingCart,
+      onClick: () => onTabChange("sales")
+    },
+    {
+      label: "Categories",
+      href: "categories",
+      icon: FolderOpen,
+      onClick: () => onTabChange("categories")
+    }
+  ];
+
   return (
     <header className="w-full bg-background py-4 shadow-sm">
-      <Text size="displayLarge" as="h1" className="max-w-6xl block mx-auto">
+      <Text
+        size="displayLarge"
+        as="h1"
+        className="max-w-6xl block mx-auto text-center xl:text-start"
+      >
         SmartMart Dashboard
       </Text>
 
-      <nav className="mt-4 pt-6 border-t border-border max-w-6xl mx-auto flex justify-between items-center">
-        <ul className="flex items-center gap-6">
-          <Text
-            as="li"
-            size="paragraphTiny"
-            className={listItemVariants({ active: active === "dashboard" })}
-            asChild
-          >
-            <button type="button" onClick={() => onTabChange("dashboard")}>
-              <LayoutDashboard className="size-4" />
-              Dashboard
-            </button>
-          </Text>
-          <Text
-            as="li"
-            size="paragraphTiny"
-            className={listItemVariants({ active: active === "products" })}
-            asChild
-          >
-            <button type="button" onClick={() => onTabChange("products")}>
-              <Package className="size-4" />
-              Produtos
-            </button>
-          </Text>
-
-          <Text
-            as="li"
-            size="paragraphTiny"
-            className={listItemVariants({ active: active === "sales" })}
-            asChild
-          >
-            <button type="button" onClick={() => onTabChange("sales")}>
-              <ShoppingCart className="size-4" />
-              Vendas
-            </button>
-          </Text>
-
-          <Text
-            as="li"
-            size="paragraphTiny"
-            className={listItemVariants({ active: active === "categories" })}
-            asChild
-          >
-            <button type="button" onClick={() => onTabChange("categories")}>
-              <FolderOpen className="size-4" />
-              Categorias
-            </button>
-          </Text>
+      <nav className="mt-4 pt-6 border-t border-border max-w-6xl mx-auto flex items-center overflow-x-auto">
+        <ul className="w-full flex items-center gap-6 px-10 sm:px-0 sm:justify-center xl:justify-start min-w-lg sm:min-w-auto">
+          {links.map(link => (
+            <Text
+              as="li"
+              size="paragraphTiny"
+              className={listItemVariants({ active: active === link.href })}
+              asChild
+            >
+              <button type="button" onClick={link.onClick}>
+                <link.icon className="size-4" />
+                {link.label}
+              </button>
+            </Text>
+          ))}
         </ul>
       </nav>
     </header>

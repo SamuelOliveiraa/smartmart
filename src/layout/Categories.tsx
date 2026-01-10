@@ -1,25 +1,17 @@
 import Button from "@/components/Button";
 import { GenericDataTable } from "@/components/GenericDataTable";
 import HeaderPage from "@/components/HeaderPage";
+import { useCategories } from "@/hooks/useCategories";
 import type { Category } from "@/types/category";
 import type { ColumnDef } from "@tanstack/react-table";
 import { Plus } from "lucide-react";
 
 export default function Categories() {
+  const { categories, loading } = useCategories();
+
   const productColumns: ColumnDef<Category>[] = [
     { accessorKey: "id", header: "ID" },
     { accessorKey: "name", header: "Nome" }
-  ];
-
-  const myProducts = [
-    {
-      id: "1",
-      name: "Teclado Mecânico RGB"
-    },
-    {
-      id: "2",
-      name: "Mouse Gamer 12000 DPI"
-    }
   ];
 
   return (
@@ -30,9 +22,12 @@ export default function Categories() {
           Nova Categoria
         </Button>
       </HeaderPage>
-      <div className="mt-10">
-        <GenericDataTable columns={productColumns} data={myProducts} />
-      </div>
+
+      <GenericDataTable
+        loading={loading}
+        columns={productColumns}
+        data={categories}
+      />
     </div>
   );
 }
