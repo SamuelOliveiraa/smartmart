@@ -7,7 +7,7 @@ import { useCategories } from "@/hooks/useCategories";
 import { useProducts } from "@/hooks/useProducts";
 import type { Product } from "@/types/product";
 import type { ColumnDef } from "@tanstack/react-table";
-import { Download, Pen, Plus, Upload } from "lucide-react";
+import { Download, Pen, Upload } from "lucide-react";
 import { useMemo, useState } from "react";
 
 export default function Products() {
