@@ -13,6 +13,7 @@ import { useSales } from "@/hooks/useSales";
 import type { Sale } from "@/types/sale";
 import { delay } from "@/lib/delay";
 import toast from "react-hot-toast";
+import { notifyWorkInProgress } from "@/lib/notifyWorkInProgress";
 
 export default function Sales() {
   const { sales, loading, downloadSalesCSV, isDownloading } = useSales();
@@ -96,7 +97,7 @@ export default function Sales() {
         id: "actions",
         header: "Ações",
         cell: () => (
-          <button className="cursor-pointer hover:text-primary transition-colors">
+          <button className="cursor-pointer" onClick={notifyWorkInProgress}>
             <Pen className="size-5" />
           </button>
         )
