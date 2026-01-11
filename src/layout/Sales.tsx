@@ -94,6 +94,27 @@ export default function Sales() {
   return (
     <div className="flex flex-col gap-4 ">
       <HeaderPage text="Vendas">
+        <div className="hidden xs:flex gap-2">
+          <Button
+            loading={isDownloading}
+            variant="secondary"
+            onClick={() => downloadSalesCSV()}
+          >
+            <Download className="size-4" />
+            Exportar CSV
+          </Button>
+
+          <Button
+            disabled={!selectedProductId && !selectedCategoryId}
+            onClick={() => clearFilters()}
+          >
+            <FunnelX className="size-4" />
+            Limpar filtros
+          </Button>
+        </div>
+      </HeaderPage>
+
+      <div className="flex items-center justify-end gap-2 xs:hidden">
         <Button
           loading={isDownloading}
           variant="secondary"
@@ -110,7 +131,7 @@ export default function Sales() {
           <FunnelX className="size-4" />
           Limpar filtros
         </Button>
-      </HeaderPage>
+      </div>
 
       <div className="flex flex-col sm:flex-row items-center gap-4">
         <Select

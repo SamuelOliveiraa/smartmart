@@ -1,8 +1,9 @@
 import { API_URL } from "@/config/env";
+import type { CategoryPost } from "@/types/category";
 
 export const categoriesAPI = {
   get: () => fetch(`${API_URL}/categories`).then(response => response.json()),
-  post: (data: { name: string }) =>
+  post: (data: CategoryPost) =>
     fetch(`${API_URL}/categories`, {
       method: "POST",
       headers: {

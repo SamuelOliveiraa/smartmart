@@ -1,6 +1,6 @@
 import { categoriesAPI } from "@/api/categoriesAPI";
 import { queryClient } from "@/main";
-import type { Category } from "@/types/category";
+import type { Category, CategoryPost } from "@/types/category";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 export const useCategories = () => {
@@ -10,8 +10,8 @@ export const useCategories = () => {
     staleTime: 1000 * 60 * 5 // 5 minutes
   });
 
-  const createCategory = useMutation<Category, Error, { name: string }>({
-    mutationFn: (data: { name: string }) => categoriesAPI.post(data),
+  const createCategory = useMutation<Category, Error, CategoryPost>({
+    mutationFn: (data: CategoryPost) => categoriesAPI.post(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["categories"] });
     }

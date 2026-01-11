@@ -4,6 +4,7 @@ import ModalBase from "./ModalBase";
 import { useEffect, useState } from "react";
 import { useCategories } from "@/hooks/useCategories";
 import { delay } from "@/lib/delay";
+import toast from "react-hot-toast";
 
 type FormValues = {
   name: string;
@@ -26,9 +27,11 @@ export default function AddCategoryModal() {
     try {
       createCategory(data);
       await delay(1000);
+      toast.success("Categoria criada com sucesso!");
       setOpen(false);
       reset();
     } catch (error) {
+      toast.error("Erro ao criar categoria! Por favor, tente novamente.");
       console.error(error);
     } finally {
       setLoading(false);

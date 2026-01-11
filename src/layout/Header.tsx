@@ -35,19 +35,19 @@ export default function Header({ active, onTabChange }: HeaderProps) {
       onClick: () => onTabChange("dashboard")
     },
     {
-      label: "Products",
+      label: "Produtos",
       href: "products",
       icon: Package,
       onClick: () => onTabChange("products")
     },
     {
-      label: "Sales",
+      label: "Vendas",
       href: "sales",
       icon: ShoppingCart,
       onClick: () => onTabChange("sales")
     },
     {
-      label: "Categories",
+      label: "Categorias",
       href: "categories",
       icon: FolderOpen,
       onClick: () => onTabChange("categories")

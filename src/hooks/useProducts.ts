@@ -1,12 +1,7 @@
 import { productsAPI } from "@/api/productsAPI";
 import { queryClient } from "@/main";
-import type { Product } from "@/types/product";
+import type { Product, ProductPost } from "@/types/product";
 import { useMutation, useQuery } from "@tanstack/react-query";
-
-interface UploadResponse {
-  message: string;
-  success: boolean;
-}
 
 export const useProducts = () => {
   const productsQuery = useQuery<Product[], Error>({
@@ -15,15 +10,8 @@ export const useProducts = () => {
     staleTime: 1000 * 60 * 5 // 5 minutes
   });
 
-  const createProduct = useMutation<Product, Error, Product>({
-    mutationFn: (newProduct: Product) => productsAPI.post(newProduct),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["products"] });
-    }
-  });
-
-  const uploadProductsCSV = useMutation<UploadResponse, Error, File>({
-    mutationFn: file => productsAPI.postCsv(file),
+  const createProduct = useMutation<Product, Error, ProductPost>({
+    mutationFn: (newProduct: ProductPost) => productsAPI.post(newProduct),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["products"] });
     }
@@ -50,8 +38,6 @@ export const useProducts = () => {
     createProduct: createProduct.mutate,
     isSaving: createProduct.isPending,
     downloadProductsCSV: downloadProductsCSV.mutate,
-    isDownloading: downloadProductsCSV.isPending,
-    uploadProductsCSV: uploadProductsCSV.mutate,
-    isUploading: uploadProductsCSV.isPending
+    isDownloading: downloadProductsCSV.isPending
   };
 };

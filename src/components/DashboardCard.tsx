@@ -47,7 +47,9 @@ export default function DashboardCard({
           {title}
         </Text>
 
-        <Text size="displayLarge">{text}</Text>
+        <Text size="displayLarge" className="w-full max-w-50 truncate">
+          {text}
+        </Text>
       </div>
     </div>
   );

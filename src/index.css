@@ -56,6 +56,13 @@
 
   /* Fonts */
   --font-inter: "Inter", sans-serif;
+
+  /* Grids  */
+  --grid-auto-cards: repeat(auto-fill, minmax(280px, 1fr));
+  --grid-dashboard: repeat(auto-fit, minmax(280px, 1fr));
+
+  /* Breakpoints */
+  --breakpoint-xs: 430px;
 }
 
 @theme inline {

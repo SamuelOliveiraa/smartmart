@@ -6,3 +6,5 @@ export interface Product {
   category_id: number;
   brand?: string;
 }
+
+export type ProductPost = Omit<Product, "id">;

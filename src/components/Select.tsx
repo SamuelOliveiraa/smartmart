@@ -6,12 +6,10 @@ import {
   SelectValue
 } from "@/components/ui/select";
 import { Text } from "./Text";
+import type { Category } from "@/types/category";
 
 interface SelectProps {
-  dataSelect: {
-    id: number;
-    name: string;
-  }[];
+  dataSelect: Category[];
   placeholder: string;
   setSelectedItem: (value: string) => void;
   value?: string;

@@ -5,14 +5,12 @@ import { useEffect, useState } from "react";
 import { useCategories } from "@/hooks/useCategories";
 import { formatCurrencyBRL } from "@/lib/formatCurrencyBRL";
 import Select from "../Select";
+import toast from "react-hot-toast";
+import { delay } from "@/lib/delay";
+import { useProducts } from "@/hooks/useProducts";
+import type { ProductPost } from "@/types/product";
 
-type FormValues = {
-  name: string;
-  category: string;
-  price: number;
-  description: string;
-  brand: string;
-};
+type FormValues = ProductPost;
 
 export default function AddProductModal() {
   const {
@@ -21,26 +19,48 @@ export default function AddProductModal() {
     reset,
     control,
     formState: { errors }
-  } = useForm<FormValues>();
+  } = useForm<FormValues>({
+    defaultValues: {
+      name: "",
+      description: "",
+      brand: "",
+      price: 0,
+      category_id: 0
+    }
+  });
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
   const { categories } = useCategories();
+  const { createProduct } = useProducts();
 
   async function handleSubmitForm(data: FormValues) {
     setLoading(true);
     try {
-      console.log(data);
+      if (!data.category_id) {
+        toast.error("Por favor, selecione uma categoria!");
+        return;
+      }
 
-      /*
-      if (!categorySelected) return;
-      // createCategory(data);
+      const rawPrice = String(data.price)
+        .replace("R$", "")
+        .replace(/\./g, "")
+        .replace(",", ".")
+        .trim();
+
+      const newProduct = {
+        ...data,
+        category_id: Number(data.category_id),
+        price: Number(rawPrice)
+      };
+
+      createProduct(newProduct);
       await delay(1000);
+      toast.success("Produto criado com sucesso!");
       setOpen(false);
       reset();
-
-      */
     } catch (error) {
+      toast.error("Erro ao criar produto! Por favor, tente novamente.");
       console.error(error);
     } finally {
       setLoading(false);
@@ -101,7 +121,7 @@ export default function AddProductModal() {
           />
 
           <Controller
-            name="category"
+            name="category_id"
             control={control}
             rules={{ required: "Selecione uma categoria" }}
             render={({ field }) => (
@@ -109,9 +129,9 @@ export default function AddProductModal() {
                 <Select
                   dataSelect={categories}
                   placeholder="Todas as categorias"
-                  value={field.value}
+                  value={String(field.value === 0 ? "all" : field.value)}
                   setSelectedItem={field.onChange}
-                  error={errors.category?.message ? true : false}
+                  error={errors.category_id?.message ? true : false}
                 />
               </>
             )}

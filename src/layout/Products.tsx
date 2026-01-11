@@ -5,19 +5,17 @@ import AddProductModal from "@/components/modals/AddProductModal";
 import Select from "@/components/Select";
 import { useCategories } from "@/hooks/useCategories";
 import { useProducts } from "@/hooks/useProducts";
+import { delay } from "@/lib/delay";
+import { notifyWorkInProgress } from "@/lib/notifyWorkInProgress";
 import type { Product } from "@/types/product";
 import type { ColumnDef } from "@tanstack/react-table";
 import { Download, Pen, Upload } from "lucide-react";
 import { useMemo, useState } from "react";
+import toast from "react-hot-toast";
 
 export default function Products() {
-  const {
-    products,
-    loading,
-    downloadProductsCSV,
-    uploadProductsCSV,
-    isDownloading
-  } = useProducts();
+  const { products, loading, downloadProductsCSV, isDownloading } =
+    useProducts();
   const { categories } = useCategories();
 
   const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
@@ -33,6 +31,19 @@ export default function Products() {
 
   function handleSelectChange(value: string) {
     setSelectedCategoryId(value === "all" ? null : Number(value));
+  }
+
+  // function handleFileUpload() {}
+
+  async function handleFileExport() {
+    try {
+      downloadProductsCSV();
+      await delay(1000);
+      toast.success("Arquivo exportado com sucesso!");
+    } catch (error) {
+      console.error(error);
+      toast.error("Erro ao exportar arquivo!");
+    }
   }
 
   const productColumns: ColumnDef<Product>[] = [
@@ -52,58 +63,29 @@ export default function Products() {
       id: "actions",
       header: "Ações",
       cell: () => (
-        <button
-          className="cursor-pointer"
-          onClick={() => console.log("não da!")}
-        >
+        <button className="cursor-pointer" onClick={notifyWorkInProgress}>
           <Pen className="size-5" />
         </button>
       )
     }
   ];
 
-  function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0];
-
-    if (!file) return;
-    if (file.type !== "text/csv" && !file.name.endsWith(".csv")) {
-      alert("Por favor, selecione um arquivo CSV.");
-      return;
-    }
-
-    uploadProductsCSV(file, {
-      onSuccess: () => {
-        alert("Arquivo CSV importado com sucesso!");
-        event.target.value = "";
-      },
-      onError: error => {
-        alert(`Erro ao importar arquivo CSV: ${error}`);
-      }
-    });
-
-    const formData = new FormData();
-    formData.append("file", file);
-  }
-
   return (
     <div className="flex flex-col gap-4">
       <HeaderPage text="Produtos">
         <div className="hidden md:flex items-center gap-4">
-          <Button variant="secondary" className="relative">
-            <input
-              id="csvFile"
-              type="file"
-              className="absolute top-0 left-0 w-full h-full z-10 opacity-0 cursor-pointer"
-              accept=".csv, text/csv, application/vnd.ms-excel"
-              onChange={handleFileChange}
-            />
+          <Button
+            variant="secondary"
+            className="relative"
+            onClick={notifyWorkInProgress}
+          >
             <Upload className="size-4" />
             Upload CSV
           </Button>
 
           <Button
             variant="secondary"
-            onClick={() => downloadProductsCSV()}
+            onClick={handleFileExport}
             loading={isDownloading}
           >
             <Download className="size-4" />

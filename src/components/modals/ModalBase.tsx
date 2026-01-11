@@ -4,6 +4,7 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -36,7 +37,10 @@ export default function ModalBase({
           {title}
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent aria-describedby="Insira as informações do produto ou da categoria conforme abaixo">
+        <DialogDescription className="sr-only h-0">
+          Insira as informações do produto ou da categoria conforme abaixo
+        </DialogDescription>
         <DialogHeader className="flex flex-row items-center justify-between border-b border-border pb-5 p-5">
           <Text size="displaySmall">{title}</Text>
 
@@ -50,7 +54,7 @@ export default function ModalBase({
         <>
           {children}
 
-          <DialogFooter className="border-t border-border pt-3 p-5">
+          <DialogFooter className="flex-row justify-end border-t border-border pt-3 p-5">
             <DialogClose asChild>
               <Button variant="secondary">Cancelar</Button>
             </DialogClose>

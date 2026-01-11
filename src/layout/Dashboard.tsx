@@ -43,14 +43,14 @@ export default function Dashboard() {
       const monthName = date
         .toLocaleString("pt-BR", { month: "short" })
         .toUpperCase();
-      const monthIndex = date.getMonth(); // Janeiro é 0, Fevereiro é 1...
+      const monthIndex = date.getMonth();
 
       if (!monthlyData[monthName]) {
         monthlyData[monthName] = {
           month: monthName,
           sales: 0,
           profit: 0,
-          monthIndex: monthIndex // Guardamos o índice para ordenar depois
+          monthIndex: monthIndex
         };
       }
 
@@ -88,7 +88,6 @@ export default function Dashboard() {
   const getMostSoldProduct = () => {
     if (filteredSales.length === 0) return "Nenhum";
 
-    // Criamos um mapa de quantidade por produto:
     const productMap: Record<number, number> = {};
 
     filteredSales.forEach(sale => {
@@ -100,7 +99,6 @@ export default function Dashboard() {
       productMap[Number(a)] > productMap[Number(b)] ? a : b
     );
 
-    // Buscamos o nome desse produto na sua lista de produtos
     const product = products.find(p => p.id === Number(mostSoldId));
     return product?.name || "Desconhecido";
   };
@@ -113,8 +111,8 @@ export default function Dashboard() {
       color: "#006fee"
     },
     profit: {
-      label: "Lucro", // Isso muda o texto que aparece no Tooltip
-      color: "#10b981" // Cor verde para o lucro
+      label: "Lucro",
+      color: "#10b981"
     }
   } satisfies ChartConfig;
 
@@ -130,7 +128,7 @@ export default function Dashboard() {
         }
       />
 
-      <div className="flex gap-4">
+      <div className="grid grid-cols-(--grid-auto-cards) mx-auto sm:mx-0 gap-4">
         <DashboardCard
           type="sales"
           title="Vendas totais"
@@ -148,7 +146,8 @@ export default function Dashboard() {
         />
       </div>
 
-      <div className="flex gap-4">
+      <div className="grid grid-cols-(--grid-dashboard) gap-4">
+        {/* Grafico 1*/}
         <div className="max-w-2xl flex-1 bg-background shadow-sm p-4 border rounded-lg">
           <Text
             className="border-b border-border pb-4 mb-6 block w-full"
@@ -179,6 +178,7 @@ export default function Dashboard() {
           </div>
         </div>
 
+        {/* Grafico 2*/}
         <div className="max-w-2xl flex-1 bg-background shadow-sm p-4 border rounded-lg">
           <Text
             className="border-b border-border pb-4 mb-6 block w-full"
