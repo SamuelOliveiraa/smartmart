@@ -3,12 +3,11 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
-  SelectSharedProps
+  SelectValue
 } from "@/components/ui/select";
 import { Text } from "./Text";
 
-interface SelectProps extends SelectSharedProps {
+interface SelectProps {
   dataSelect: {
     id: number;
     name: string;

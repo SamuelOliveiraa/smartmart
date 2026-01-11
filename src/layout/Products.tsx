@@ -16,8 +16,7 @@ export default function Products() {
     loading,
     downloadProductsCSV,
     uploadProductsCSV,
-    isDownloading,
-    isUploading
+    isDownloading
   } = useProducts();
   const { categories } = useCategories();
 
