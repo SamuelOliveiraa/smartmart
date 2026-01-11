@@ -1,73 +1,119 @@
-# React + TypeScript + Vite
+# [SmartMart]([URL do link](https://smart-mart-solutions.vercel.app/))
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![Demonstração do Projeto](/smartmart.gif)
 
-Currently, two official plugins are available:
+O **SmartMart** é um dashboard de gerenciamento de produtos e vendas, projetado para fornecer uma visão clara e detalhada sobre o desempenho do seu negócio. Com ele, você pode cadastrar produtos, importar dados em massa, visualizar vendas, lucros e muito mais.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ❯ Tecnologias Utilizadas
 
-## React Compiler
+Este projeto foi construído com as seguintes tecnologias:
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+- **Frontend:**
+  - [React](https://reactjs.org/)
+  - [TypeScript](https://www.typescriptlang.org/)
+  - [Vite](https://vitejs.dev/)
+- **Estilização:**
+  - [Tailwind CSS](https://tailwindcss.com/)
+  - [shadcn/ui](https://ui.shadcn.com/)
+  - [Radix UI](https://www.radix-ui.com/)
+- **Gerenciamento de Estado e Dados:**
+  - [TanStack Query](https://tanstack.com/query/v5)
+- **Tabelas e Gráficos:**
+  - [TanStack Table](https://tanstack.com/table/v8)
+  - [Recharts](https://recharts.org/)
+- **Formulários:**
+  - [React Hook Form](https://react-hook-form.com/)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## ❯ Funcionalidades
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Dashboard:**
+  - Gráficos de quantidade de vendas e lucro por mês.
+  - Cards com o total de vendas, lucro total e o produto mais vendido.
+  - Filtro de dados por categoria.
+- **Produtos:**
+  - Cadastro manual de novos produtos.
+  - Exportação de produtos através de um arquivo CSV.
+  - Listagem de produtos com informações de vendas e lucro.
+- **Categorias:**
+  - Cadastro de novas categorias.
+  - Listagem de categorias existentes.
+- **Vendas:**
+  - Visualização detalhada de todas as vendas.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## ❯ Como Começar
+
+Siga as instruções abaixo para executar o projeto em seu ambiente local.
+
+### Pré-requisitos
+
+- [Node.js](https://nodejs.org/) (versão 18 ou superior)
+- [Yarn](https://yarnpkg.com/) ou [npm](https://www.npmjs.com/)
+
+### Instalação
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/usuario/smartmart.git
+   ```
+2. Navegue até o diretório do projeto:
+   ```bash
+   cd smartmart
+   ```
+3. Instale as dependências:
+   ```bash
+   npm install
+   ```
+   ou
+   ```bash
+   yarn install
+   ```
+
+### Executando a Aplicação
+
+Para iniciar o servidor de desenvolvimento, execute o seguinte comando:
+
+```bash
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Abra [http://localhost:5173](http://localhost:5173) (ou a porta informada no seu terminal) no seu navegador para ver a aplicação.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## ❯ Estrutura do Projeto
+
+O projeto está organizado da seguinte forma:
+
 ```
+├── src
+│   ├── api
+│   ├── components
+│   ├── config
+│   ├── hooks
+│   ├── layout
+│   ├── lib
+│   └── types
+├── public
+├── .gitignore
+├── package.json
+├── README.md
+└── ...
+```
+
+- **`src/api`:** Funções de chamada à API para categorias, produtos e vendas.
+- **`src/components`:** Componentes reutilizáveis como botões, modais e tabelas.
+- **`src/config`:** Configurações do ambiente.
+- **`src/hooks`:** Hooks customizados para buscar e gerenciar dados.
+- **`src/layout`:** Componentes de página principais, como Dashboard, Produtos, Vendas e Categorias.
+- **`src/lib`:** Funções utilitárias.
+- **`src/types`:** Definições de tipos TypeScript.
+
+---
+
+## ❯ Licença
+
+Este projeto está sob a licença MIT.
