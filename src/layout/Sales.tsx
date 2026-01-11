@@ -11,6 +11,8 @@ import { useCategories } from "@/hooks/useCategories";
 import { useProducts } from "@/hooks/useProducts";
 import { useSales } from "@/hooks/useSales";
 import type { Sale } from "@/types/sale";
+import { delay } from "@/lib/delay";
+import toast from "react-hot-toast";
 
 export default function Sales() {
   const { sales, loading, downloadSalesCSV, isDownloading } = useSales();
@@ -49,6 +51,18 @@ export default function Sales() {
     setSelectedProductId(null);
     setSelectedCategoryId(null);
   }
+
+
+  async function handleFileExport() {
+      try {
+        downloadSalesCSV();
+        await delay(1000);
+        toast.success("Arquivo exportado com sucesso!");
+      } catch (error) {
+        console.error(error);
+        toast.error("Erro ao exportar arquivo!");
+      }
+    }
 
   // Name of columns
   const productColumns = useMemo<ColumnDef<Sale>[]>(
@@ -98,7 +112,7 @@ export default function Sales() {
           <Button
             loading={isDownloading}
             variant="secondary"
-            onClick={() => downloadSalesCSV()}
+            onClick={handleFileExport}
           >
             <Download className="size-4" />
             Exportar CSV
@@ -118,7 +132,7 @@ export default function Sales() {
         <Button
           loading={isDownloading}
           variant="secondary"
-          onClick={() => downloadSalesCSV()}
+          onClick={handleFileExport}
         >
           <Download className="size-4" />
           Exportar CSV
