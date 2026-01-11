@@ -1,6 +1,6 @@
 # [SmartMart]([URL do link](https://smart-mart-solutions.vercel.app/))
 
-[![Demonstração do Projeto](/smartmart.gif)
+![Demonstração do Projeto](/smartmart.gif)
 
 O **SmartMart** é um dashboard de gerenciamento de produtos e vendas, projetado para fornecer uma visão clara e detalhada sobre o desempenho do seu negócio. Com ele, você pode cadastrar produtos, importar dados em massa, visualizar vendas, lucros e muito mais.
 
