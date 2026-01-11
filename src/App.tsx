@@ -37,7 +37,7 @@ function App() {
           },
           loading: {
             style: {
-              background: "#ffc53d",
+              background: "#FF9800",
               color: "#fff"
             },
             icon: <MessageSquareWarning />
