@@ -6,23 +6,30 @@ import {
   DialogContent,
   DialogFooter,
   DialogHeader,
+  DialogTitle,
   DialogTrigger
 } from "../ui/dialog";
 import Button from "../Button";
+
+interface ModalBaseProps {
+  children: React.ReactNode;
+  title: string;
+  loading?: boolean;
+  formID?: string;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}
 
 export default function ModalBase({
   children,
   title,
   loading,
-  formID
-}: {
-  children: React.ReactNode;
-  title: string;
-  loading?: boolean;
-  formID?: string;
-}) {
+  formID,
+  onOpenChange,
+  open
+}: ModalBaseProps) {
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>
         <Button>
           <Plus className="size-4" />
@@ -32,6 +39,8 @@ export default function ModalBase({
       <DialogContent>
         <DialogHeader className="flex flex-row items-center justify-between border-b border-border pb-5 p-5">
           <Text size="displaySmall">{title}</Text>
+
+          <DialogTitle className="sr-only">{title}</DialogTitle>
 
           <DialogClose className="cursor-pointer">
             <X className="size-4" />

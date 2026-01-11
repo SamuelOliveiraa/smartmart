@@ -10,8 +10,8 @@ export const useCategories = () => {
     staleTime: 1000 * 60 * 5 // 5 minutes
   });
 
-  const createCategory = useMutation<Category, Error, Category>({
-    mutationFn: (newCategory: Category) => categoriesAPI.post(newCategory),
+  const createCategory = useMutation<Category, Error, { name: string }>({
+    mutationFn: (data: { name: string }) => categoriesAPI.post(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["categories"] });
     }

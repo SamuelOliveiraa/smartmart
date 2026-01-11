@@ -15,5 +15,19 @@ export const productsAPI = {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(product)
-    }).then(response => response.json())
+    }).then(response => response.json()),
+  postCsv: async (file: File) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    const response = await fetch(`${API_URL}/products/import_csv`, {
+      method: "POST",
+      body: formData
+    });
+
+    if (!response.ok) {
+      throw new Error("Falha ao importar arquivo CSV no servidor");
+    }
+
+    return response.json();
+  }
 };

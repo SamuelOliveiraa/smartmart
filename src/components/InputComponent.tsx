@@ -18,9 +18,6 @@ const InputVariants = tv({
   variants: {
     hasError: {
       true: "border-red-500"
-    },
-    hasPrefixValue: {
-      true: "pl-6"
     }
   },
   defaultVariants: {
@@ -55,17 +52,12 @@ export default function InputComponent({
   return (
     <div className="flex flex-col gap-2 relative">
       <div className="flex flex-col-reverse relative gap-2">
-        {inputID === "value" && (
-          <span className="text-base absolute top-7">R$</span>
-        )}
-
         <input
           id={inputID}
           {...register}
           className={cn(
             InputVariants({
-              hasError: !!error,
-              hasPrefixValue: inputID === "value"
+              hasError: !!error
             }),
             className
           )}

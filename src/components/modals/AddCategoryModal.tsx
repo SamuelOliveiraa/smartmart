@@ -2,7 +2,8 @@ import { useForm } from "react-hook-form";
 import InputComponent from "../InputComponent";
 import ModalBase from "./ModalBase";
 import { useEffect, useState } from "react";
-import { categoriesAPI } from "@/api/categoriesAPI";
+import { useCategories } from "@/hooks/useCategories";
+import { delay } from "@/lib/delay";
 
 type FormValues = {
   name: string;
@@ -16,11 +17,16 @@ export default function AddCategoryModal() {
     formState: { errors }
   } = useForm<FormValues>();
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const { createCategory } = useCategories();
 
   async function handleSubmitForm(data: FormValues) {
     setLoading(true);
     try {
-      await categoriesAPI.post(data);
+      createCategory(data);
+      await delay(1000);
+      setOpen(false);
       reset();
     } catch (error) {
       console.error(error);
@@ -41,6 +47,8 @@ export default function AddCategoryModal() {
       loading={loading}
       formID="form-add-category"
       title="Cadastrar Categoria"
+      open={open}
+      onOpenChange={setOpen}
     >
       <div className="p-5">
         <form id="form-add-category" onSubmit={handleSubmit(handleSubmitForm)}>

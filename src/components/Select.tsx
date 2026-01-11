@@ -3,23 +3,29 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
+  SelectSharedProps
 } from "@/components/ui/select";
 import { Text } from "./Text";
 
-interface SelectProps {
+interface SelectProps extends SelectSharedProps {
   dataSelect: {
     id: number;
     name: string;
   }[];
   placeholder: string;
   setSelectedItem: (value: string) => void;
+  value?: string;
+  error?: boolean;
 }
 
 export default function Select({
   dataSelect,
   placeholder,
-  setSelectedItem
+  setSelectedItem,
+  value,
+  error,
+  ...rest
 }: SelectProps) {
   return (
     <div className="w-full flex flex-col gap-2">
@@ -27,8 +33,10 @@ export default function Select({
         {placeholder}
       </Text>
 
-      <SelectComponent onValueChange={setSelectedItem}>
-        <SelectTrigger className="w-full bg-background cursor-pointer h-11">
+      <SelectComponent onValueChange={setSelectedItem} value={value} {...rest}>
+        <SelectTrigger
+          className={`w-full bg-background cursor-pointer h-11 ${error ? "border-red-500" : ""}`}
+        >
           <SelectValue placeholder={placeholder} className="h-10" />
         </SelectTrigger>
         <SelectContent position="popper">
@@ -42,7 +50,7 @@ export default function Select({
               value={String(item.id)}
               className="cursor-pointer opacity-60 h-11"
             >
-              <Text size="paragraphSmall"> {item.name}</Text>
+              {item.name}
             </SelectItem>
           ))}
         </SelectContent>

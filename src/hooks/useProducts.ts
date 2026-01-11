@@ -3,6 +3,11 @@ import { queryClient } from "@/main";
 import type { Product } from "@/types/product";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
+interface UploadResponse {
+  message: string;
+  success: boolean;
+}
+
 export const useProducts = () => {
   const productsQuery = useQuery<Product[], Error>({
     queryKey: ["products"],
@@ -12,6 +17,13 @@ export const useProducts = () => {
 
   const createProduct = useMutation<Product, Error, Product>({
     mutationFn: (newProduct: Product) => productsAPI.post(newProduct),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+    }
+  });
+
+  const uploadProductsCSV = useMutation<UploadResponse, Error, File>({
+    mutationFn: file => productsAPI.postCsv(file),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["products"] });
     }
@@ -38,6 +50,8 @@ export const useProducts = () => {
     createProduct: createProduct.mutate,
     isSaving: createProduct.isPending,
     downloadProductsCSV: downloadProductsCSV.mutate,
-    isDownloading: downloadProductsCSV.isPending
+    isDownloading: downloadProductsCSV.isPending,
+    uploadProductsCSV: uploadProductsCSV.mutate,
+    isUploading: uploadProductsCSV.isPending
   };
 };

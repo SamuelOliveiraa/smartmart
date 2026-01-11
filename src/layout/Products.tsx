@@ -11,8 +11,14 @@ import { Download, Pen, Upload } from "lucide-react";
 import { useMemo, useState } from "react";
 
 export default function Products() {
-  const { products, loading, downloadProductsCSV, isDownloading } =
-    useProducts();
+  const {
+    products,
+    loading,
+    downloadProductsCSV,
+    uploadProductsCSV,
+    isDownloading,
+    isUploading
+  } = useProducts();
   const { categories } = useCategories();
 
   const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
@@ -57,11 +63,41 @@ export default function Products() {
     }
   ];
 
+  function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+
+    if (!file) return;
+    if (file.type !== "text/csv" && !file.name.endsWith(".csv")) {
+      alert("Por favor, selecione um arquivo CSV.");
+      return;
+    }
+
+    uploadProductsCSV(file, {
+      onSuccess: () => {
+        alert("Arquivo CSV importado com sucesso!");
+        event.target.value = "";
+      },
+      onError: error => {
+        alert(`Erro ao importar arquivo CSV: ${error}`);
+      }
+    });
+
+    const formData = new FormData();
+    formData.append("file", file);
+  }
+
   return (
     <div className="flex flex-col gap-4">
       <HeaderPage text="Produtos">
         <div className="hidden md:flex items-center gap-4">
-          <Button variant="secondary">
+          <Button variant="secondary" className="relative">
+            <input
+              id="csvFile"
+              type="file"
+              className="absolute top-0 left-0 w-full h-full z-10 opacity-0 cursor-pointer"
+              accept=".csv, text/csv, application/vnd.ms-excel"
+              onChange={handleFileChange}
+            />
             <Upload className="size-4" />
             Upload CSV
           </Button>

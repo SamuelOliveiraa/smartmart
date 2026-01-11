@@ -10,8 +10,8 @@
 
 ### **Requisitos Obrigatórios (Front-end - React)**
 
-- **[ ] Dashboard:** Mínimo de dois gráficos (Quantidade de Vendas e Lucro das Vendas).
-- **[ ] Formulário de Cadastro:** Interface para registro manual de novos produtos.
+- **[X] Dashboard:** Mínimo de dois gráficos (Quantidade de Vendas e Lucro das Vendas).
+- **[X] Formulário de Cadastro:** Interface para registro manual de novos produtos.
 - **[ ] Importação CSV:** Funcionalidade de upload de arquivo para inserção em massa.
 - **[X] Filtros:** Sistema de busca/filtro de produtos por categoria.
 - **[X] UI/UX:** Interface estilizada obrigatoriamente com **Tailwind CSS** e componentes (Shadcn/UI ou Ant Design).

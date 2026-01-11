@@ -46,8 +46,8 @@ export default function Sales() {
   }, [sales, selectedProductId, selectedCategoryId, products]);
 
   function clearFilters() {
-    setSelectedProductId(0);
-    setSelectedCategoryId(0);
+    setSelectedProductId(null);
+    setSelectedCategoryId(null);
   }
 
   // Name of columns
@@ -114,7 +114,7 @@ export default function Sales() {
 
       <div className="flex flex-col sm:flex-row items-center gap-4">
         <Select
-          key={selectedCategoryId ? "cat-active" : "cat-empty"}
+          value={String(selectedCategoryId ?? "all")}
           dataSelect={categories}
           placeholder="Todas as categorias"
           setSelectedItem={val =>
@@ -122,7 +122,7 @@ export default function Sales() {
           }
         />
         <Select
-          key={selectedProductId ? "prod-active" : "prod-empty"}
+          value={String(selectedProductId ?? "all")}
           dataSelect={products.filter(
             p => !selectedCategoryId || p.category_id === selectedCategoryId
           )}

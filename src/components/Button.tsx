@@ -6,6 +6,7 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode;
   variant?: "primary" | "secondary";
   loading?: boolean;
+  className?: string;
 };
 
 const buttonVariants = tv({
@@ -29,12 +30,13 @@ export default function Button({
   children,
   variant,
   loading,
+  className,
   ...rest
 }: ButtonProps) {
   return (
     <Text size="paragraphSmall" asChild>
       <button
-        className={buttonVariants({ loading, variant })}
+        className={buttonVariants({ loading, variant, className })}
         disabled={loading}
         {...rest}
       >
