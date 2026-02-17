@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 # [SmartMart]([Link URL](https://smart-mart-solutions.vercel.app/))
 
 This project was developed as a practical test for the full-stack development internship selection process at APOLLO SOLUTIONS. The goal is to provide an elegant and intuitive design for managing products, categories, and sales in a fictional retail system, SmartMart.
+=======
+# [SmartMart](https://smart-mart-solutions.vercel.app/)
+
+![Demonstração do Projeto](https://raw.githubusercontent.com/SamuelOliveiraa/smartmart/refs/heads/main/public/smartmart.gif)
+>>>>>>> 2cb1e58d4d9ec89459f72c132d68510ca5c93d06
 
 ![Project Demonstration](/smartmart.gif)
 
