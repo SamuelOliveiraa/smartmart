@@ -8,3 +8,4 @@ export const salesAPI = {
     return response.blob();
   }
 };
+ 

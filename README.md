@@ -1,92 +1,94 @@
-# [SmartMart]([URL do link](https://smart-mart-solutions.vercel.app/))
+# [SmartMart]([Link URL](https://smart-mart-solutions.vercel.app/))
 
-![Demonstração do Projeto](/smartmart.gif)
+This project was developed as a practical test for the full-stack development internship selection process at APOLLO SOLUTIONS. The goal is to provide an elegant and intuitive design for managing products, categories, and sales in a fictional retail system, SmartMart.
 
-O **SmartMart** é um dashboard de gerenciamento de produtos e vendas, projetado para fornecer uma visão clara e detalhada sobre o desempenho do seu negócio. Com ele, você pode cadastrar produtos, importar dados em massa, visualizar vendas, lucros e muito mais.
+![Project Demonstration](/smartmart.gif)
 
-## ❯ Tecnologias Utilizadas
+**SmartMart** is a product and sales management dashboard, designed to provide a clear and detailed overview of your business performance. With it, you can register products, import data in bulk, view sales, profits, and much more.
 
-Este projeto foi construído com as seguintes tecnologias:
+## ❯ Technologies Used
+
+This project was built with the following technologies:
 
 - **Frontend:**
   - [React](https://reactjs.org/)
   - [TypeScript](https://www.typescriptlang.org/)
   - [Vite](https://vitejs.dev/)
-- **Estilização:**
+- **Styling:**
   - [Tailwind CSS](https://tailwindcss.com/)
   - [shadcn/ui](https://ui.shadcn.com/)
   - [Radix UI](https://www.radix-ui.com/)
-- **Gerenciamento de Estado e Dados:**
+- **State and Data Management:**
   - [TanStack Query](https://tanstack.com/query/v5)
-- **Tabelas e Gráficos:**
+- **Tables and Charts:**
   - [TanStack Table](https://tanstack.com/table/v8)
   - [Recharts](https://recharts.org/)
-- **Formulários:**
+- **Forms:**
   - [React Hook Form](https://react-hook-form.com/)
 
 ---
 
-## ❯ Funcionalidades
+## ❯ Features
 
 - **Dashboard:**
-  - Gráficos de quantidade de vendas e lucro por mês.
-  - Cards com o total de vendas, lucro total e o produto mais vendido.
-  - Filtro de dados por categoria.
-- **Produtos:**
-  - Cadastro manual de novos produtos.
-  - Exportação de produtos através de um arquivo CSV.
-  - Listagem de produtos com informações de vendas e lucro.
-- **Categorias:**
-  - Cadastro de novas categorias.
-  - Listagem de categorias existentes.
-- **Vendas:**
-  - Visualização detalhada de todas as vendas.
+  - Graphs of sales quantity and profit per month.
+  - Cards with total sales, total profit, and the best-selling product.
+  - Data filtering by category.
+- **Products:**
+  - Manual registration of new products.
+  - Export of products via a CSV file.
+  - Product listing with sales and profit information.
+- **Categories:**
+  - Registration of new categories.
+  - Listing of existing categories.
+- **Sales:**
+  - Detailed view of all sales.
 
 ---
 
-## ❯ Como Começar
+## ❯ Getting Started
 
-Siga as instruções abaixo para executar o projeto em seu ambiente local.
+Follow the instructions below to run the project in your local environment.
 
-### Pré-requisitos
+### Prerequisites
 
-- [Node.js](https://nodejs.org/) (versão 18 ou superior)
-- [Yarn](https://yarnpkg.com/) ou [npm](https://www.npmjs.com/)
+- [Node.js](https://nodejs.org/) (version 18 or higher)
+- [Yarn](https://yarnpkg.com/) or [npm](https://www.npmjs.com/)
 
-### Instalação
+### Installation
 
-1. Clone o repositório:
+1. Clone the repository:
    ```bash
    git clone https://github.com/usuario/smartmart.git
    ```
-2. Navegue até o diretório do projeto:
+2. Navigate to the project directory:
    ```bash
    cd smartmart
    ```
-3. Instale as dependências:
+3. Install dependencies:
    ```bash
    npm install
    ```
-   ou
+   or
    ```bash
    yarn install
    ```
 
-### Executando a Aplicação
+### Running the Application
 
-Para iniciar o servidor de desenvolvimento, execute o seguinte comando:
+To start the development server, run the following command:
 
 ```bash
 npm run dev
 ```
 
-Abra [http://localhost:5173](http://localhost:5173) (ou a porta informada no seu terminal) no seu navegador para ver a aplicação.
+Open [http://localhost:5173](http://localhost:5173) (or the port indicated in your terminal) in your browser to see the application.
 
 ---
 
-## ❯ Estrutura do Projeto
+## ❯ Project Structure
 
-O projeto está organizado da seguinte forma:
+The project is organized as follows:
 
 ```
 ├── src
@@ -104,16 +106,16 @@ O projeto está organizado da seguinte forma:
 └── ...
 ```
 
-- **`src/api`:** Funções de chamada à API para categorias, produtos e vendas.
-- **`src/components`:** Componentes reutilizáveis como botões, modais e tabelas.
-- **`src/config`:** Configurações do ambiente.
-- **`src/hooks`:** Hooks customizados para buscar e gerenciar dados.
-- **`src/layout`:** Componentes de página principais, como Dashboard, Produtos, Vendas e Categorias.
-- **`src/lib`:** Funções utilitárias.
-- **`src/types`:** Definições de tipos TypeScript.
+- **`src/api`:** API call functions for categories, products, and sales.
+- **`src/components`:** Reusable components such as buttons, modals, and tables.
+- **`src/config`:** Environment configurations.
+- **`src/hooks`:** Custom hooks for fetching and managing data.
+- **`src/layout`:** Main page components, such as Dashboard, Products, Sales, and Categories.
+- **`src/lib`:** Utility functions.
+- **`src/types`:** TypeScript type definitions.
 
 ---
 
-## ❯ Licença
+## ❯ License
 
-Este projeto está sob a licença MIT.
+This project is licensed under the MIT License.
