@@ -1,8 +1,8 @@
-# [SmartMart]([Link URL](https://smart-mart-solutions.vercel.app/))
+# [SmartMart](https://smart-mart-solutions.vercel.app/)
 
 This project was developed as a practical test for the full-stack development internship selection process at APOLLO SOLUTIONS. The goal is to provide an elegant and intuitive design for managing products, categories, and sales in a fictional retail system, SmartMart.
 
-![Project Demonstration](/smartmart.gif)
+![Project Demonstration](https://raw.githubusercontent.com/SamuelOliveiraa/smartmart/refs/heads/main/public/smartmart.gif)
 
 **SmartMart** is a product and sales management dashboard, designed to provide a clear and detailed overview of your business performance. With it, you can register products, import data in bulk, view sales, profits, and much more.
 
