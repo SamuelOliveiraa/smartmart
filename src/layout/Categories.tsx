@@ -14,8 +14,8 @@ export default function Categories() {
   ];
 
   return (
-    <div className="flex flex-col gap-4">
-      <HeaderPage text="Categorias">
+    <div className="flex flex-col gap-4" id="categories">
+      <HeaderPage text="Categorias" id="categories-options">
         <AddCategoryModal />
       </HeaderPage>
 

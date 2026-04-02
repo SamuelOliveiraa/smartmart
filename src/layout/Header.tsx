@@ -1,6 +1,7 @@
 import { Text } from "@/components/Text";
 import type { ActiveTab } from "@/types/activeTab";
 import {
+  CircleQuestionMark,
   FolderOpen,
   LayoutDashboard,
   Package,
@@ -11,6 +12,7 @@ import { tv } from "tailwind-variants";
 interface HeaderProps {
   active: ActiveTab;
   onTabChange: (tab: ActiveTab) => void;
+  onManualStartTour: () => void;
 }
 
 const listItemVariants = tv({
@@ -26,7 +28,11 @@ const listItemVariants = tv({
   }
 });
 
-export default function Header({ active, onTabChange }: HeaderProps) {
+export default function Header({
+  active,
+  onTabChange,
+  onManualStartTour
+}: HeaderProps) {
   const links = [
     {
       label: "Dashboard",
@@ -55,17 +61,23 @@ export default function Header({ active, onTabChange }: HeaderProps) {
   ];
 
   return (
-    <header className="w-full bg-background py-4 shadow-sm">
-      <Text
-        size="displayLarge"
-        as="h1"
-        className="max-w-6xl block mx-auto text-center xl:text-start"
-      >
-        SmartMart Dashboard
-      </Text>
+    <header className="w-full bg-background py-4 shadow-sm" id="header">
+      <div className="max-w-6xl mx-auto flex items-center justify-between w-full px-2 lg:p-0">
+        <Text size="displayLarge" as="h1" className="text-center xl:text-start">
+          SmartMart Dashboard
+        </Text>
+
+        <CircleQuestionMark
+          className="size-6 cursor-pointer"
+          onClick={onManualStartTour}
+        />
+      </div>
 
       <nav className="mt-4 pt-6 border-t border-border max-w-6xl mx-auto flex items-center overflow-x-auto">
-        <ul className="w-full flex items-center gap-6 px-10 sm:px-0 sm:justify-center xl:justify-start min-w-lg sm:min-w-auto">
+        <ul
+          className="w-full flex items-center gap-6 px-10 sm:px-0 sm:justify-center xl:justify-start min-w-lg sm:min-w-auto"
+          id="navigation"
+        >
           {links.map(link => (
             <Text
               key={link.href}
@@ -74,7 +86,11 @@ export default function Header({ active, onTabChange }: HeaderProps) {
               className={listItemVariants({ active: active === link.href })}
               asChild
             >
-              <button type="button" onClick={link.onClick}>
+              <button
+                id={`link-${link.href}`}
+                type="button"
+                onClick={link.onClick}
+              >
                 <link.icon className="size-4" />
                 {link.label}
               </button>

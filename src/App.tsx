@@ -1,8 +1,9 @@
 import type { ActiveTab } from "@/types/activeTab";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dashboard, Products, Sales, Categories, Header } from "@/layout";
 import { Toaster } from "react-hot-toast";
 import { CircleCheckBig, CircleX, MessageSquareWarning } from "lucide-react";
+import { Tour } from "./components/Tour";
 
 function App() {
   const [activeTab, setActiveTab] = useState<ActiveTab>("dashboard");
@@ -10,6 +11,15 @@ function App() {
   function handleTabChange(tab: ActiveTab) {
     setActiveTab(tab);
   }
+
+  const { startTour } = Tour({ handleTabChange });
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      startTour();
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="bg-gray-50">
@@ -45,7 +55,12 @@ function App() {
           duration: 3000
         }}
       />
-      <Header active={activeTab} onTabChange={handleTabChange} />
+
+      <Header
+        active={activeTab}
+        onTabChange={handleTabChange}
+        onManualStartTour={startTour}
+      />
 
       <main className="max-w-6xl mx-auto px-4 py-8">
         {activeTab === "dashboard" && <Dashboard />}

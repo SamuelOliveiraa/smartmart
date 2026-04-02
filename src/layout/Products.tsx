@@ -71,21 +71,41 @@ export default function Products() {
   ];
 
   return (
-    <div className="flex flex-col gap-4">
-      <HeaderPage text="Produtos">
-        <div className="hidden md:flex items-center gap-4">
-          <Button
-            variant="secondary"
-            className="relative"
-            onClick={notifyWorkInProgress}
-          >
+    <div className="flex flex-col gap-4" id="products">
+      <div className="flex flex-col gap-4" id="products-options">
+        <HeaderPage text="Produtos">
+          <div className="hidden md:flex items-center gap-4">
+            <Button
+              variant="secondary"
+              className="relative"
+              onClick={notifyWorkInProgress}
+            >
+              <Upload className="size-4" />
+              Upload CSV
+            </Button>
+
+            <Button
+              variant="secondary"
+              onClick={handleFileExport}
+              loading={isDownloading}
+            >
+              <Download className="size-4" />
+              Exportar CSV
+            </Button>
+          </div>
+
+          <AddProductModal />
+        </HeaderPage>
+
+        <div className="flex md:hidden items-center justify-end  gap-4">
+          <Button variant="secondary">
             <Upload className="size-4" />
             Upload CSV
           </Button>
 
           <Button
             variant="secondary"
-            onClick={handleFileExport}
+            onClick={() => downloadProductsCSV()}
             loading={isDownloading}
           >
             <Download className="size-4" />
@@ -93,30 +113,12 @@ export default function Products() {
           </Button>
         </div>
 
-        <AddProductModal />
-      </HeaderPage>
-
-      <div className="flex md:hidden items-center justify-end  gap-4">
-        <Button variant="secondary">
-          <Upload className="size-4" />
-          Upload CSV
-        </Button>
-
-        <Button
-          variant="secondary"
-          onClick={() => downloadProductsCSV()}
-          loading={isDownloading}
-        >
-          <Download className="size-4" />
-          Exportar CSV
-        </Button>
+        <Select
+          dataSelect={categories}
+          placeholder="Todas as categorias"
+          setSelectedItem={handleSelectChange}
+        />
       </div>
-
-      <Select
-        dataSelect={categories}
-        placeholder="Todas as categorias"
-        setSelectedItem={handleSelectChange}
-      />
 
       <GenericDataTable
         loading={loading}

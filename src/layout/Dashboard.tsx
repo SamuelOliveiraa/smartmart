@@ -12,6 +12,7 @@ import { useCategories } from "@/hooks/useCategories";
 import { useProducts } from "@/hooks/useProducts";
 import { useSales } from "@/hooks/useSales";
 import { formatCurrencyBRL } from "@/lib/formatCurrencyBRL";
+import type { Sale } from "@/types/sale";
 import { useMemo, useState } from "react";
 import {
   Bar,
@@ -32,7 +33,7 @@ export default function Dashboard() {
     null
   );
 
-  const processData = (salesData: any[]) => {
+  const processData = (salesData: Sale[]) => {
     const monthlyData: Record<
       string,
       { month: string; sales: number; profit: number; monthIndex: number }
@@ -117,33 +118,35 @@ export default function Dashboard() {
   } satisfies ChartConfig;
 
   return (
-    <div className="flex flex-col gap-6">
-      <HeaderPage text="Dashboard"></HeaderPage>
+    <div className="flex flex-col gap-6" id="dashboard">
+      <HeaderPage text="Dashboard" />
 
-      <Select
-        dataSelect={categories}
-        placeholder="Todas as categorias"
-        setSelectedItem={val =>
-          setSelectedCategoryId(val === "all" ? null : Number(val))
-        }
-      />
+      <div id="dashboard-options" className="flex flex-col gap-6">
+        <Select
+          dataSelect={categories}
+          placeholder="Todas as categorias"
+          setSelectedItem={val =>
+            setSelectedCategoryId(val === "all" ? null : Number(val))
+          }
+        />
 
-      <div className="grid grid-cols-(--grid-auto-cards) mx-auto sm:mx-0 gap-4">
-        <DashboardCard
-          type="sales"
-          title="Vendas totais"
-          text={String(totalQty)}
-        />
-        <DashboardCard
-          type="profit"
-          title="Lucro total"
-          text={formatCurrencyBRL(String(totalProfit.toFixed(2)))}
-        />
-        <DashboardCard
-          type="mostSold"
-          title="Produtos mais vendidos"
-          text={topProduct}
-        />
+        <div className="grid grid-cols-(--grid-auto-cards) mx-auto sm:mx-0 gap-4">
+          <DashboardCard
+            type="sales"
+            title="Vendas totais"
+            text={String(totalQty)}
+          />
+          <DashboardCard
+            type="profit"
+            title="Lucro total"
+            text={formatCurrencyBRL(String(totalProfit.toFixed(2)))}
+          />
+          <DashboardCard
+            type="mostSold"
+            title="Produtos mais vendidos"
+            text={topProduct}
+          />
+        </div>
       </div>
 
       <div className="grid grid-cols-(--grid-dashboard) gap-4">
@@ -177,7 +180,6 @@ export default function Dashboard() {
             </ChartContainer>
           </div>
         </div>
-
         {/* Grafico 2*/}
         <div className="max-w-2xl flex-1 bg-background shadow-sm p-4 border rounded-lg">
           <Text

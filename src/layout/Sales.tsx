@@ -53,17 +53,16 @@ export default function Sales() {
     setSelectedCategoryId(null);
   }
 
-
   async function handleFileExport() {
-      try {
-        downloadSalesCSV();
-        await delay(1000);
-        toast.success("Arquivo exportado com sucesso!");
-      } catch (error) {
-        console.error(error);
-        toast.error("Erro ao exportar arquivo!");
-      }
+    try {
+      downloadSalesCSV();
+      await delay(1000);
+      toast.success("Arquivo exportado com sucesso!");
+    } catch (error) {
+      console.error(error);
+      toast.error("Erro ao exportar arquivo!");
     }
+  }
 
   // Name of columns
   const productColumns = useMemo<ColumnDef<Sale>[]>(
@@ -107,9 +106,30 @@ export default function Sales() {
   );
 
   return (
-    <div className="flex flex-col gap-4 ">
-      <HeaderPage text="Vendas">
-        <div className="hidden xs:flex gap-2">
+    <div className="flex flex-col gap-4" id="sales">
+      <div className="flex flex-col gap-4" id="sales-options">
+        <HeaderPage text="Vendas">
+          <div className="hidden xs:flex gap-2">
+            <Button
+              loading={isDownloading}
+              variant="secondary"
+              onClick={handleFileExport}
+            >
+              <Download className="size-4" />
+              Exportar CSV
+            </Button>
+
+            <Button
+              disabled={!selectedProductId && !selectedCategoryId}
+              onClick={() => clearFilters()}
+            >
+              <FunnelX className="size-4" />
+              Limpar filtros
+            </Button>
+          </div>
+        </HeaderPage>
+
+        <div className="flex items-center justify-end gap-2 xs:hidden">
           <Button
             loading={isDownloading}
             variant="secondary"
@@ -127,46 +147,27 @@ export default function Sales() {
             Limpar filtros
           </Button>
         </div>
-      </HeaderPage>
 
-      <div className="flex items-center justify-end gap-2 xs:hidden">
-        <Button
-          loading={isDownloading}
-          variant="secondary"
-          onClick={handleFileExport}
-        >
-          <Download className="size-4" />
-          Exportar CSV
-        </Button>
-
-        <Button
-          disabled={!selectedProductId && !selectedCategoryId}
-          onClick={() => clearFilters()}
-        >
-          <FunnelX className="size-4" />
-          Limpar filtros
-        </Button>
-      </div>
-
-      <div className="flex flex-col sm:flex-row items-center gap-4">
-        <Select
-          value={String(selectedCategoryId ?? "all")}
-          dataSelect={categories}
-          placeholder="Todas as categorias"
-          setSelectedItem={val =>
-            setSelectedCategoryId(val === "all" ? null : Number(val))
-          }
-        />
-        <Select
-          value={String(selectedProductId ?? "all")}
-          dataSelect={products.filter(
-            p => !selectedCategoryId || p.category_id === selectedCategoryId
-          )}
-          placeholder="Todos os produtos"
-          setSelectedItem={val =>
-            setSelectedProductId(val === "all" ? null : Number(val))
-          }
-        />
+        <div className="flex flex-col sm:flex-row items-center gap-4">
+          <Select
+            value={String(selectedCategoryId ?? "all")}
+            dataSelect={categories}
+            placeholder="Todas as categorias"
+            setSelectedItem={val =>
+              setSelectedCategoryId(val === "all" ? null : Number(val))
+            }
+          />
+          <Select
+            value={String(selectedProductId ?? "all")}
+            dataSelect={products.filter(
+              p => !selectedCategoryId || p.category_id === selectedCategoryId
+            )}
+            placeholder="Todos os produtos"
+            setSelectedItem={val =>
+              setSelectedProductId(val === "all" ? null : Number(val))
+            }
+          />
+        </div>
       </div>
 
       <GenericDataTable
